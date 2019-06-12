@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import api from '../services/api';
+
 import './Feed.css';
 
 import more from '../assets/more.svg';
@@ -8,61 +10,47 @@ import send from '../assets/send.svg';
 import comment from '../assets/comment.svg';
 
 export default class Feed extends Component {
+
+  state = {
+    feed: []
+  };
+
+  async componentDidMount() {
+    const response = await api.get('posts');
+    this.setState({ feed: response.data })
+  }
+
   render() {
     return (
       <section id="post-list">
-        <article>
-          <header>
-            <div className="user-info">
-              <span>Yuri Alves</span>
-              <span className="place">São Paulo</span>
-            </div>
+        {this.state.feed.map(post => (
+          <article key={post._id}>
+            <header>
+              <div className="user-info">
+                <span>{post.author}</span>
+                <span className="place">{post.place}</span>
+              </div>
 
-            <img src={more} alt="Mais" />
-          </header>
+              <img src={more} alt="Mais" />
+            </header>
 
-          <img src="http://localhost:3333/files/logo.jpg" alt="Mais" />
+            <img src={`http://localhost:3333/files/${post.image}`} alt="Mais" />
 
-          <footer>
-            <div className="actions">
-              <img src={like} alt="" />
-              <img src={comment} alt="" />
-              <img src={send} alt="" />
-            </div>
+            <footer>
+              <div className="actions">
+                <img src={like} alt="" />
+                <img src={comment} alt="" />
+                <img src={send} alt="" />
+              </div>
 
-            <strong>900 curtidas</strong>
-            <p>
-              Um post muito massa da Omnistack!
-              <span>#react #node #express #mongo</span>
-            </p>
-          </footer>
-        </article>
-        <article>
-          <header>
-            <div className="user-info">
-              <span>Yuri Alves</span>
-              <span className="place">São Paulo</span>
-            </div>
-
-            <img src={more} alt="Mais" />
-          </header>
-
-          <img src="http://localhost:3333/files/logo.jpg" alt="Mais" />
-
-          <footer>
-            <div className="actions">
-              <img src={like} alt="" />
-              <img src={comment} alt="" />
-              <img src={send} alt="" />
-            </div>
-
-            <strong>900 curtidas</strong>
-            <p>
-              Um post muito massa da Omnistack!
-              <span>#react #node #express #mongo</span>
-            </p>
-          </footer>
-        </article>
+              <strong>{post.likes} curtidas</strong>
+              <p>
+                {post.description}
+                <span>{post.hashtags}</span>
+              </p>
+            </footer>
+          </article>
+        ))}
       </section>
     );
   }
