@@ -15,6 +15,7 @@ export default createAppContainer(
     Feed,
     New,
   }, {
+    initialRouteName: 'New',
     defaultNavigationOptions: {
       headerBackTitle: null,
       headerTintColor: '#000', 

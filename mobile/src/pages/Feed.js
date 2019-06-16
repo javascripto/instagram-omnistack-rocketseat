@@ -53,7 +53,7 @@ export default class Feed extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <FlatList
           data={this.state.feed}
           keyExtractor={post => post._id}
