@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const baseURL = (window.location.hostname === 'localhost')
   ? 'http://localhost:3333'
-  : 'https://70b898c2.ngrok.io';
+  : 'https://instagram-rocketseat.herokuapp.com';
 
 const api = axios.create({ baseURL });
 
