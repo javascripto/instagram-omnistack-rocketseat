@@ -48,7 +48,7 @@ export default class Feed extends Component {
   }
 
   handleLike = (id) => {
-    api.post(`post/${id}/like`)
+    api.post(`posts/${id}/like`)
   }
 
   render() {
@@ -72,7 +72,7 @@ export default class Feed extends Component {
 
               <View style={styles.feedItemFooter}>
                 <View style={styles.actions}>
-                  <TouchableOpacity style={styles.action} onPress={() => handleLike(item._id)}>
+                  <TouchableOpacity style={styles.action} onPress={() => this.handleLike(item._id)}>
                     <Image source={like} />
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.action} onPress={() => {}}>

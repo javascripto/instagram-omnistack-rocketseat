@@ -52,17 +52,17 @@ export default class New extends Component {
   }
 
   handleSubmit = async () => {
-    const fd = new FormData();
+    const data = new FormData();
 
-    fd.append('image', this.state.image);
-    fd.append('place', this.state.place);
-    fd.append('author', this.state.author);
-    fd.append('hashtags', this.state.hashtags);
-    fd.append('description', this.state.description);
+    data.append('image', this.state.image);
+    data.append('place', this.state.place);
+    data.append('author', this.state.author);
+    data.append('hashtags', this.state.hashtags);
+    data.append('description', this.state.description);
 
-    await api.post('posts', data)
+    await api.post('posts', data);
 
-    this.props.navigation.nagivate('Feed');
+    this.props.navigation.navigate('Feed');
   }
 
   render() {
